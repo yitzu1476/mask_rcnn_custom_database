@@ -78,7 +78,7 @@ class ShapesConfig(Config):
     IMAGES_PER_GPU = 1
 
     # Number of classes (including background)
-    NUM_CLASSES = 1 + 1  # background + 1 shapes, shapes number depends on the number of target objects
+    NUM_CLASSES = 1 + 1  # background + 1 shapes, shapes number depends on the number of target / object
 
     IMAGE_MIN_DIM = 320
     IMAGE_MAX_DIM = 384
@@ -121,4 +121,8 @@ imglist = os.listdir(img_floder)
 count = len(imglist)
 print('img_floder ,',img_floder)
 ```
+
+# Model Testing
+After the training, the model is ready to detect your target in the images with 
+
 
