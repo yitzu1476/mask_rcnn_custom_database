@@ -68,3 +68,58 @@ for child_dir in os.listdir(src_dir):
     img.save(new_mask)
 ```
 
+# Training Process
+
+Several command lines in [training_maskrcnn_custom_database.py](https://github.com/yitzu1476/mask_rcnn_custom_database/blob/master/training_maskrcnn_custom_database.py) must be changed  before training, which are marked below.
+```python
+class ShapesConfig(Config):
+    NAME = "shapes"
+    GPU_COUNT = 1
+    IMAGES_PER_GPU = 1
+
+    # Number of classes (including background)
+    NUM_CLASSES = 1 + 1  # background + 1 shapes, shapes number depends on the number of target objects
+
+    IMAGE_MIN_DIM = 320
+    IMAGE_MAX_DIM = 384
+```
+```python
+def load_shapes(self, count, img_floder, mask_floder, imglist, dataset_root_path):
+    # Add classes
+    self.add_class("shapes", 1, "rov")
+    # self.add_class("shapes", 2, "new_object_name")
+    # self.add_class("shapes", 3, "another_new_object_name")
+```
+```python
+def load_mask(self, image_id):
+    global iter_num
+    print("image_id",image_id)
+    info = self.image_info[image_id]
+    count = 1  # number of object
+    img = Image.open(info['mask_path'])
+    num_obj = self.get_obj_index(img)
+    mask = np.zeros([info['height'], info['width'], num_obj], dtype=np.uint8)
+    mask = self.draw_mask(num_obj, mask, img,image_id)
+    occlusion = np.logical_not(mask[:, :, -1]).astype(np.uint8)
+    for i in range(count - 2, -1, -1):
+        mask[:, :, i] = mask[:, :, i] * occlusion
+        occlusion = np.logical_and(occlusion, np.logical_not(mask[:, :, i]))
+    labels = []
+    labels = self.from_yaml_get_class(image_id)
+    labels_form = []
+    for i in range(len(labels)):
+        if labels[i].find("rov") != -1:
+            labels_form.append("rov")
+            # labels_form.append("new_object_name")
+            # labels_form.append("another_new_object_name")
+```
+```python
+dataset_root_path="imgs_for_training/" # where your training pics are 
+img_floder = dataset_root_path + "pic"
+mask_floder = dataset_root_path + "cv2_mask"
+#yaml_floder = dataset_root_path
+imglist = os.listdir(img_floder)
+count = len(imglist)
+print('img_floder ,',img_floder)
+```
+
