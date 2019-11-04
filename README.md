@@ -29,7 +29,7 @@ Clone my file [training_maskrcnn_custom_database.py](https://github.com/yitzu147
 After finishing installion, label all your targets in your images which are store in `pic`, and save all the json files in `json`.<br>
 
 4. Convert json files into dataset using labelme_json_to_dataset command.<br>
-To convert all the files at a time, clone my [labelme_json_all_in once.py] file to any directory with some changes mention below.<br>
+To convert all the files at a time, clone my [labelme_json_all_in_once.py](https://github.com/yitzu1476/mask_rcnn_custom_database/blob/master/labelme_json_all_in_once.py) file to any directory with some changes mention below.<br>
 After converting, move all the folders (ex: img_01_json, img_02_json) in `json` to `labelme_json`.
 ```python
 import os
