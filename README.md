@@ -47,7 +47,7 @@ for i in range(23):
     os.system(command)
 ```
 
-5. Create mask from png files in labelme_json using my file [img_16to8.py](https://github.com/yitzu1476/mask_rcnn_custom_database/blob/master/img_16to8.py) with some changes mention below.
+5. Create mask from png files in labelme_json using my file [img_16to8.py](https://github.com/yitzu1476/mask_rcnn_custom_database/blob/master/img_16to8.py) with some changes mention below, and the result files will be saved in `cv2_mask`.
 ```python
 from PIL import Image
 import numpy as np
