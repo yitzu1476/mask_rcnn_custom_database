@@ -117,7 +117,6 @@ def load_mask(self, image_id):
 dataset_root_path="imgs_for_training/" # where your training pics are 
 img_floder = dataset_root_path + "pic"
 mask_floder = dataset_root_path + "cv2_mask"
-#yaml_floder = dataset_root_path
 imglist = os.listdir(img_floder)
 count = len(imglist)
 print('img_floder ,',img_floder)
