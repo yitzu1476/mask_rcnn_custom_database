@@ -122,7 +122,4 @@ count = len(imglist)
 print('img_floder ,',img_floder)
 ```
 
-# Model Testing
-After the training, the model is ready to detect your target in the images with 
-
 
